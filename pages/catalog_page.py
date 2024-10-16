@@ -7,14 +7,14 @@ from base.base_class import Base
 class CatalogPage(Base):
     """ Класс содержащий локаторы и методы для страницы авторизации"""
 
-    url = 'https://www.saucedemo.com/'
-
     def __init__(self, driver):
         #super().__init__(driver)
         self._driver = driver
 
     # Locators
-    add_product1 = '//button[@id="add-to-cart-sauce-labs-backpack"]'
+    button_add_product1 = '//button[@id="add-to-cart-sauce-labs-backpack"]'
+    button_add_product2 = '//button[@id="add-to-cart-sauce-labs-bike-light"]'
+    button_add_product3 = '//button[@id="add-to-cart-sauce-labs-bolt-t-shirt"]'
     cart = '//div[@id="shopping_cart_container"]'
 
 
@@ -23,7 +23,17 @@ class CatalogPage(Base):
     @property
     def get_add_product1(self):
         wait = WebDriverWait(self._driver, 10)
-        return wait.until(EC.element_to_be_clickable((By.XPATH, self.add_product1)))
+        return wait.until(EC.element_to_be_clickable((By.XPATH, self.button_add_product1)))
+
+    @property
+    def get_add_product2(self):
+        wait = WebDriverWait(self._driver, 10)
+        return wait.until(EC.element_to_be_clickable((By.XPATH, self.button_add_product2)))
+
+    @property
+    def get_add_product3(self):
+        wait = WebDriverWait(self._driver, 10)
+        return wait.until(EC.element_to_be_clickable((By.XPATH, self.button_add_product3)))
 
     @property
     def get_cart (self):
@@ -36,6 +46,14 @@ class CatalogPage(Base):
         self.get_add_product1.click()
         print('Click add_product1')
 
+    def click_add_product2(self):
+        self.get_add_product2.click()
+        print('Click add_product2')
+
+    def click_add_product3(self):
+        self.get_add_product3.click()
+        print('Click add_product3')
+
     def click_cart(self):
         self.get_cart.click()
         print('Click cart')
@@ -44,7 +62,17 @@ class CatalogPage(Base):
     # Methods
 
     # выбор товара
-    def add_product(self):
+    def add_product1(self):
         self.get_current_url()
         self.click_add_product1()
+        self.click_cart()
+
+    def add_product2(self):
+        self.get_current_url()
+        self.click_add_product2()
+        self.click_cart()
+
+    def add_product3(self):
+        self.get_current_url()
+        self.click_add_product3()
         self.click_cart()

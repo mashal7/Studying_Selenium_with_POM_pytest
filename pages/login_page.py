@@ -50,7 +50,7 @@ class LoginPage(Base):
         self.get_password.send_keys(password)
         print('Input password')
 
-    def input_login_button(self):
+    def click_login_button(self):
         self.get_login_button.click()
         print('Click login_button')
 
@@ -64,6 +64,6 @@ class LoginPage(Base):
         self.get_current_url()
         self.input_user_name('standard_user')
         self.input_password('secret_sauce')
-        self.input_login_button()
+        self.click_login_button()
 
         self.assert_word(self.get_word_on_catalog_page, 'Products')
