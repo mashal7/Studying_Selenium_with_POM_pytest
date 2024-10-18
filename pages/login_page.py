@@ -1,8 +1,10 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
+import allure
 from base.base_class import Base
+from utilities.logger import Logger
+
 
 class LoginPage(Base):
     """ Класс содержащий локаторы и методы для страницы авторизации"""
@@ -57,13 +59,18 @@ class LoginPage(Base):
     # Methods
 
     # авторизация в системе
+
     def authorization(self):
+        with allure.step('authorization'):
+            Logger.add_start_step(method='authorization')
 
-        self._driver.get(self.url)
-        #self._driver.maximize_window()
-        self.get_current_url()
-        self.input_user_name('standard_user')
-        self.input_password('secret_sauce')
-        self.click_login_button()
+            self._driver.get(self.url)
+            #self._driver.maximize_window()
+            self.get_current_url()
+            self.input_user_name('standard_user')
+            self.input_password('secret_sauce')
+            self.click_login_button()
 
-        self.assert_word(self.get_word_on_catalog_page, 'Products')
+            self.assert_word(self.get_word_on_catalog_page, 'Products')
+
+            Logger.add_end_step(url=self._driver.current_url, method='authorization')

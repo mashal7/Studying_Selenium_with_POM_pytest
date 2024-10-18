@@ -1,8 +1,11 @@
+import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 from base.base_class import Base
+from utilities.logger import Logger
+
 
 class ClientInfoPage(Base):
     """ Класс содержащий локаторы и методы для страницы авторизации"""
@@ -60,8 +63,11 @@ class ClientInfoPage(Base):
 
     # авторизация в системе
     def input_info(self):
-        self.input_first_name('Ivan')
-        self.input_last_name('Ivanov')
-        self.input_postal_code('1234')
-        self.click_continue_button()
+        with allure.step('input info'):
+            Logger.add_start_step(method='input_info')
+            self.input_first_name('Ivan')
+            self.input_last_name('Ivanov')
+            self.input_postal_code('1234')
+            self.click_continue_button()
+            Logger.add_end_step(url=self._driver.current_url, method='input_info')
 

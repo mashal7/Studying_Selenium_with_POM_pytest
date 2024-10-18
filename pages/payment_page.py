@@ -1,8 +1,10 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
+import allure
 from base.base_class import Base
+from utilities.logger import Logger
+
 
 class PaymentPage(Base):
     """ Класс содержащий локаторы и методы для страницы авторизации"""
@@ -32,5 +34,8 @@ class PaymentPage(Base):
 
     # выбор товара
     def do_payment(self):
-        self.get_current_url()
-        self.click_finish_button()
+        with allure.step('do payment'):
+            Logger.add_start_step(method='do_payment')
+            self.get_current_url()
+            self.click_finish_button()
+            Logger.add_end_step(url=self._driver.current_url, method='do_payment')

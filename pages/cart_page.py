@@ -3,6 +3,8 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 from base.base_class import Base
+from utilities.logger import Logger
+import allure
 
 class CartPage(Base):
     """ Класс содержащий локаторы и методы для страницы авторизации"""
@@ -32,5 +34,8 @@ class CartPage(Base):
 
     # подтверждение товара
     def confirm_product(self):
-        self.get_current_url()
-        self.click_checkout_button()
+        with allure.step('confirm product'):
+            Logger.add_start_step(method='confirm_product')
+            self.get_current_url()
+            self.click_checkout_button()
+            Logger.add_end_step(url=self._driver.current_url, method='confirm_product')

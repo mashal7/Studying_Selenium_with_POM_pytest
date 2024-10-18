@@ -1,5 +1,5 @@
 import time
-
+import allure
 
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -13,6 +13,7 @@ from pages.login_page import LoginPage
 from pages.payment_page import PaymentPage
 
 
+@allure.description('Test buy product 1')
 #@pytest.mark.run(order=2)
 def test_buy_product1(set_group, set_up):
     """Тест по покупке товара включает в себя:

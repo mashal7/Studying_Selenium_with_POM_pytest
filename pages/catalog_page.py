@@ -1,8 +1,11 @@
+import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 from base.base_class import Base
+from utilities.logger import Logger
+
 
 class CatalogPage(Base):
     """ Класс содержащий локаторы и методы для страницы авторизации"""
@@ -63,16 +66,19 @@ class CatalogPage(Base):
 
     # выбор товара
     def add_product1(self):
-        self.get_current_url()
-        self.click_add_product1()
-        self.click_cart()
+        with allure.step('add product1'):
+            Logger.add_start_step(method='add_product1')
+            self.get_current_url()
+            self.click_add_product1()
+            self.click_cart()
+            Logger.add_end_step(url=self._driver.current_url, method='add_product1')
 
-    def add_product2(self):
-        self.get_current_url()
-        self.click_add_product2()
-        self.click_cart()
+        def add_product2(self):
+            self.get_current_url()
+            self.click_add_product2()
+            self.click_cart()
 
-    def add_product3(self):
-        self.get_current_url()
-        self.click_add_product3()
-        self.click_cart()
+        def add_product3(self):
+            self.get_current_url()
+            self.click_add_product3()
+            self.click_cart()
